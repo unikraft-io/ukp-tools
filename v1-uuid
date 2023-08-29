@@ -1,0 +1,22 @@
+#!/bin/bash
+
+METHOD=$1
+BASE_URL=$2
+ENDPOINT=$3
+UUID=$4
+
+shift
+shift
+shift
+shift
+
+if [ -z "$UUID" ]; then
+     echo "Error: UUID or 'many' expected as first parameter."
+     echo "       In case of 'many' the UUIDs need to be supplied as JSON "
+     echo "       array of the form of '[{\"uuid\":\"...\"},{\"uuid\":\"...\"}]'."
+     exit 1
+elif [[ "$UUID" == "many" ]]; then
+UUID=""
+fi
+
+exec ./v1 "$METHOD" "$BASE_URL/$UUID/$ENDPOINT" "$@"

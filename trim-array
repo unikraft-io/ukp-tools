@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Helper script to trim the output of, for example, instances-list so it can
+# be piped as JSON object to the other operations
+
+# Check if a filename was provided as an argument
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <filename>"
+    exit 1
+fi
+
+filename="$1"
+
+# Check if the file exists
+if [ ! -f "$filename" ]; then
+    echo "File not found: $filename"
+    exit 1
+fi
+
+# Process the file line by line using awk
+awk '/\[[^\]]+\]/ {print gensub(/^.*(\[.*\]).*$/, "\\1", "g"); next} {next}' "$filename"

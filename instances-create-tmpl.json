@@ -1,0 +1,19 @@
+{
+    "image": "unikraft.io/${UKP_API_USER}/app-nginx/latest",
+    "args": [
+      "-c",
+      "/nginx/conf/nginx.conf"
+    ],
+    "services": [
+      {
+        "port": 443,
+        "internal_port": 80,
+        "handlers": [
+          "tls"
+        ]
+      }
+    ],
+    "memory_mb": 16,
+    "autostart": true,
+    "wait_timeout_ms": 10000
+}

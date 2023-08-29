@@ -1,0 +1,7 @@
+#!/bin/bash
+
+JSON="${1:-$(cat services-create.json)}"
+
+shift
+
+exec ./v1 POST services "$JSON" "$@"

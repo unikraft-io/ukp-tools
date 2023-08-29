@@ -1,0 +1,11 @@
+{
+    "services": [
+        {
+            "port": 443,
+            "internal_port": 80,
+            "handlers": [
+                "tls"
+            ]
+        }
+    ]
+}

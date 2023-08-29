@@ -1,0 +1,28 @@
+#!/bin/bash
+
+METHOD=$1
+URL=$2
+JSON=$3
+
+shift
+shift
+shift
+
+UKP_API_ADDR="${UKP_API_ADDR:-https://api.fra0.kraft.cloud}"
+
+if [ -z "$UKP_API_ADDR" ]; then
+     echo "Info: UKP_API_ADDR is empty. Using https://api.fra0.kraft.cloud."
+     UKP_API_ADDR=https://api.fra0.kraft.cloud
+fi
+
+if [ -z "$UKP_API_TOKEN" ]; then
+     echo "Error: UKP_API_TOKEN must be set to the user's API token"
+     exit 1
+fi
+
+exec curl -s -H Expect: \
+          -X $METHOD \
+          -H "Authorization: Bearer $UKP_API_TOKEN" \
+          -H "Content-Type: application/json" \
+          "$UKP_API_ADDR/v1/$URL" \
+          -d "${JSON:+$JSON}"
