@@ -6,6 +6,6 @@ DRAIN_TIMEOUT_MS="${2:-30000}"
 shift
 shift
 
-exec ./v1-uuid PUT instances stop "$UUID" '{
+exec ./.v1-uuid PUT instances stop "$UUID" '{
           "drain_timeout_ms": '"$DRAIN_TIMEOUT_MS"'
      }' "$@"

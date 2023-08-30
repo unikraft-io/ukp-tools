@@ -4,4 +4,4 @@ JSON="${1:-$(cat instances-create-tmpl.json | envsubst)}"
 
 shift
 
-exec ./v1 POST instances "$JSON" "$@"
+exec ./.v1 POST instances "$JSON" "$@"

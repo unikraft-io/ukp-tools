@@ -19,4 +19,4 @@ elif [[ "$UUID" == "many" ]]; then
 UUID=""
 fi
 
-exec ./v1 "$METHOD" "$BASE_URL/$UUID/$ENDPOINT" "$@"
+exec ./.v1 "$METHOD" "$BASE_URL/$UUID/$ENDPOINT" "$@"
