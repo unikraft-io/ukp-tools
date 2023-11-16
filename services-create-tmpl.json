@@ -1,10 +1,19 @@
 {
+    "name": "my-service",
+    "dns": "my-project",
     "services": [
         {
             "port": 443,
-            "internal_port": 80,
+            "destination_port": 80,
             "handlers": [
-                "tls"
+                "tls", "http"
+            ]
+        },
+        {
+            "port": 80,
+            "destination_port": 443,
+            "handlers": [
+                "http", "redirect"
             ]
         }
     ]

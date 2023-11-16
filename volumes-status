@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec ./.v1-uuid GET volumes "" "$@"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JSON="${1:-$(cat services-create.json)}"
+JSON="${1:-$(cat services-create-tmpl.json)}"
 
 shift
 

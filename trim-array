@@ -18,4 +18,4 @@ if [ ! -f "$filename" ]; then
 fi
 
 # Process the file line by line using awk
-awk '/\[[^\]]+\]/ {print gensub(/^.*(\[.*\]).*$/, "\\1", "g"); next} {next}' "$filename"
+awk '/\[[^\]]+\]/ { match($0, /\[[^\]]+\]/); print substr($0, RSTART, RLENGTH); next } { next }' "$filename"

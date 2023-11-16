@@ -20,9 +20,15 @@ if [ -z "$UKP_API_TOKEN" ]; then
      exit 1
 fi
 
-exec curl -s -H Expect: \
-          -X $METHOD \
-          -H "Authorization: Bearer $UKP_API_TOKEN" \
-          -H "Content-Type: application/json" \
-          "$UKP_API_ADDR/v1/$URL" \
-          -d "${JSON:+$JSON}"
+RESPONSE=$(curl -s -H Expect: \
+                -X $METHOD \
+                -H "Authorization: Bearer $UKP_API_TOKEN" \
+                -H "Content-Type: application/json" \
+                "$UKP_API_ADDR/v1/$URL" \
+                -d "${JSON:+$JSON}")
+
+if [ -n "$UKP_API_PIPE_JQ" ]; then
+     exec echo "$RESPONSE" | jq
+else
+     exec echo "$RESPONSE"
+fi

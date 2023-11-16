@@ -1,16 +1,32 @@
 {
-    "image": "unikraft.io/${UKP_API_USER}/app-nginx/latest",
+    "image": "unikraft.io/official/nginx:latest",
     "args": [
       "-c",
       "/nginx/conf/nginx.conf"
     ],
-    "services": [
+    "service_group": {
+      "services": [
+        {
+          "port": 443,
+          "destination_port": 80,
+          "handlers": [
+            "tls", "http"
+          ]
+        },
+        {
+          "port": 80,
+          "destination_port": 443,
+          "handlers": [
+            "http", "redirect"
+          ]
+        }
+      ]
+    },
+    "volumes": [
       {
-        "port": 443,
-        "internal_port": 80,
-        "handlers": [
-          "tls"
-        ]
+        "size_mb": 10,
+        "at": "/mnt/",
+        "readonly": false
       }
     ],
     "memory_mb": 16,
